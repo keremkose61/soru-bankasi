@@ -1,0 +1,69 @@
+=========================================
+BrainBoost ve Deneme Paylaşım Ağı
+=========================================
+
+Merhaba, bu projeyi kendi lokal sunucunuzda (XAMPP/WAMP/Laragon vb.) 
+çalıştırabilmek için lütfen aşağıdaki 3 basit adımı izleyiniz.
+
+KURULUM ADIMLARI
+------------------
+1. KLASÖRÜ TAŞIYIN:
+   Bu "soru_bankasi" klasörünü tamamen sunucunuzun web kök dizinine (örneğin XAMPP için htdocs, Laragon için www) taşıyın.
+
+2. VERİTABANI OLUŞTURUN:
+   - phpMyAdmin veya HeidiSQL üzerinden "soru_bankasi" adında boş bir MySQL veritabanı oluşturun.
+   - Bu klasörün içerisindeki "init.sql" dosyasını o veritabanında çalıştırın (İçe Aktar / Import).
+   (Bu işlem tüm tabloları, ilişkileri ve varsayılan Admin hesabını otomatik kuracaktır).
+
+3. TARAYICIDAN AÇIN:
+   Tarayıcınıza http://localhost/soru_bankasi yazıp projeyi başlatın. Proje URL ve yollarını dinamik olarak algılayacağı için herhangi bir config dosyası düzenlemenize gerek yoktur.
+
+TEST BİLGİLERİ (Giriş Hesapları)
+------------------
+- Yönetici (Admin) : admin@sorubankasi.com / password
+- Öğretmen         : hoca@test.com / password
+- Öğrenci          : ogrenci@test.com / password
+
+ÖNE ÇIKAN SİSTEM ÖZELLİKLERİ & GÜNCELLEMELER
+------------------
+1. SORU ARAMA & ETİKET SİSTEMİ:
+   - Ana sayfada başlık, açıklama ve etiket (#tyt, #matematik vb.) bazlı akıllı arama çubuğu ve filtre temizleme.
+   - Soru kartlarında ve soru detayında tıklanabilir etiketler (tıklanan etikete göre anında listeleme).
+
+2. SINAV GERİ SAYIM SAYACI (COUNTDOWN):
+   - Ana sayfada yaklaşan YKS (TYT - AYT) sınavına kalan gün, saat, dakika ve saniyeyi gösteren cam efektli canlı sayaç.
+
+3. HERKESE AÇIK KULLANICI PROFİLLERİ & DİREKT MESAJLAŞMA:
+   - Soru veya cevap sahiplerinin profilleri (/profile/{id}) görüntülenebilir.
+   - Profil kartında yazarın rozetleri, başarı oranı, soru ve çözümleri listelenir.
+   - Tek tıkla yazara özel mesaj gönderme butonu.
+
+4. PROFİL DÜZENLEME & BİYOGRAFİ:
+   - Kullanıcılar kendi profillerinde biyografi (Hakkımda) ekleyebilir ve mevcut şifrelerini güncelleyebilir.
+
+5. ÇÖZÜMLERE ALT YORUM & TARTIŞMA SİSTEMİ:
+   - Her cevabın altına soru-cevap veya teşekkür amaçlı alt yorumlar yazılabilir.
+   - Soru sahibine veya cevap sahibine sistem içi bildirim üretilir.
+
+6. GELİŞMİŞ POMODORO ODAKLANMA ODASI:
+   - 25 dk Pomodoro, 5 dk kısa mola, 15 dk uzun mola modları.
+   - Seans bitiminde Web Audio API ile melodik zil sesi ve ses açma/kapama seçeneği.
+   - Arka plan odak sesleri (Yağmur, Kafe/Kütüphane, 432Hz ses dalgaları).
+   - Chart.js ile son 7 günün odaklanma sürelerini gösteren haftalık istatistik grafiği.
+
+7. YAZDIRILABİLİR DENEME KİTAPÇIĞI (PDF) & CEVAP ANAHTARI:
+   - Mevcut soruları veya favorileri tek tıkla A4 deneme kitapçığına dönüştürme.
+   - Tek sütun / 2 sütun baskı modları ve optik form şablonu.
+   - Kitapçığın son sayfasında yazdırılabilir veya gizlenebilir "Cevap Anahtarı ve Çözüm Özeti" tablosu.
+
+8. ADMİN YÖNETİM PANELİ:
+   - Öğretmen ve Öğrenci rolleri arasında tek tıkla yetki değişimi (Öğretmen Yap / Öğrenci Yap).
+   - Kullanıcı engelleme (banlama) ve silme.
+   - AI içerik denetleme kuyruğu (onay / red).
+   - Kullanıcı şikayetlerini (raporları) inceleme ve çözme.
+
+9. PWA (PROGRESSIVE WEB APP) DESTEĞİ:
+   - Masaüstü ve mobile tam uyumlu yüklenebilir web uygulaması (Add to Home Screen).
+   - Service Worker önbellekleme ve çevrimdışı (offline.html) sayfası desteği.
+
+İyi çalışmalar dilerim.
