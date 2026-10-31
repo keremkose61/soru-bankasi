@@ -1,20 +1,33 @@
-# Secrets
-secrets.php
+# Secrets and local environment
 .env
 .env.*
+!.env.example
+secrets.php
 
 # Dependencies
-vendor/
-node_modules/
+/vendor/
+/node_modules/
 
-# IDE
+# IDE and editor files
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Logs
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
 *.log
-
-# Temporary files
 *.tmp
-public/uploads/
+*.bak
+*.old
+
+# User-uploaded files (keep the directory itself if needed)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Local test scripts
 test_ai.php
