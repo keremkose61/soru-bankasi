@@ -1,0 +1,3 @@
+<FilesMatch "^migrate_.*\.php$">
+    Require all denied
+</FilesMatch>
