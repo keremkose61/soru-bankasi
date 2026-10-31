@@ -115,7 +115,15 @@ Depodaki `BENIOKU.txt` dosyasında yerel test için örnek yönetici, öğretmen
 
 ## Ekran görüntüleri
 
-Henüz ekran görüntüsü eklenmedi. Uygulamanın ana sayfası, soru detay ekranı, Pomodoro alanı ve yönetim panelinden görüntüler eklendiğinde bu bölümü güncelleyin.
+Aşağıda uygulamanın arayüzünden alınan ekran görüntüleri yer almaktadır.
+
+| Görüntü 1 | Görüntü 2 |
+|---|---|
+| ![Uygulama ekranı 1](Screenshot_1.png) | ![Uygulama ekranı 2](Screenshot_2.png) |
+
+| Görüntü 3 | Görüntü 4 |
+|---|---|
+| ![Uygulama ekranı 3](Screenshot_3.png) | ![Uygulama ekranı 4](Screenshot_4.png) |
 
 ## Bilinen notlar
 
