@@ -37,7 +37,7 @@ if (isset($_SESSION['mod_notice'])) {
     <div class="col-lg-8 mx-auto">
         <div class="card glass-effect mb-4 position-relative border-0 shadow-lg" style="border-radius: 25px;">
             <?php if(isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $question['user_id'] || (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'))): ?>
-                <a href="<?= BASE_URL ?>/question/<?= $question['id'] ?>/delete" class="btn btn-danger btn-sm rounded-pill position-absolute top-0 end-0 m-3 z-3" onclick="return confirm('<?= __('delete_confirm') ?>');"><i class="bi bi-trash"></i> <?= __('delete') ?></a>
+                <form action="<?= BASE_URL ?>/question/<?= (int)$question['id'] ?>/delete" method="POST" class="position-absolute top-0 end-0 m-3 z-3" onsubmit="return confirm('<?= __('delete_confirm') ?>');"><button type="submit" class="btn btn-danger btn-sm rounded-pill"><i class="bi bi-trash"></i> <?= __('delete') ?></button></form>
             <?php endif; ?>
             <div class="card-body p-5">
                 <?php
@@ -208,7 +208,7 @@ if (isset($_SESSION['mod_notice'])) {
                             <span class="badge badge-glass text-muted me-2"><i class="bi bi-clock me-1"></i><?= date('d.m.Y H:i', strtotime($ans['created_at'])) ?></span>
                             
                             <?php if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $question['user_id'] && !$isBest && !$isSolved): ?>
-                                <a href="<?= BASE_URL ?>/question/<?= $question['id'] ?>/best-answer/<?= $ans['id'] ?>" class="btn btn-sm btn-outline-success rounded-pill" onclick="return confirm('Bu cevabı en iyi cevap olarak işaretlemek istediğinize emin misiniz? (Geri alınamaz)');">
+                                <form action="<?= BASE_URL ?>/question/<?= (int)$question['id'] ?>/best-answer/<?= (int)$ans['id'] ?>" method="POST" class="d-inline" onsubmit="return confirm('Bu cevabı en iyi cevap olarak işaretlemek istediğinize emin misiniz? (Geri alınamaz)');"><button type="submit" class="btn btn-sm btn-outline-success rounded-pill">
                                     <i class="bi bi-check-circle me-1"></i> En İyi Seç
                                 </a>
                             <?php endif; ?>
@@ -270,7 +270,7 @@ if (isset($_SESSION['mod_notice'])) {
                                                 <small class="text-muted ms-1" style="font-size: 0.72rem;"><i class="bi bi-clock me-1"></i><?= date('d.m.Y H:i', strtotime($c['created_at'])) ?></small>
                                             </div>
                                             <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $c['user_id'] || (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'))): ?>
-                                                <a href="<?= BASE_URL ?>/question/<?= $question['id'] ?>/comment/<?= $c['id'] ?>/delete" class="text-danger small" onclick="return confirm('Bu yorumu silmek istediğinize emin misiniz?');" title="Sil">
+                                                <form action="<?= BASE_URL ?>/question/<?= (int)$question['id'] ?>/comment/<?= (int)$c['id'] ?>/delete" method="POST" class="d-inline" onsubmit="return confirm('Bu yorumu silmek istediğinize emin misiniz?');"><button type="submit" class="btn btn-link text-danger small p-0" title="Sil">
                                                     <i class="bi bi-trash"></i>
                                                 </a>
                                             <?php endif; ?>
