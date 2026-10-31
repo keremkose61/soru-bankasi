@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-12 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
         <h2 class="fw-bold mb-0"><i class="bi bi-shield-lock text-warning"></i> <?= __('admin_dashboard') ?></h2>
-        <form action="<?= BASE_URL ?>/admin/moderation" method="POST" class="d-inline"><button type="submit" class="btn btn-outline-primary rounded-pill px-4 shadow-sm position-relative">
+        <a href="<?= BASE_URL ?>/admin/moderation" class="btn btn-outline-primary rounded-pill px-4 shadow-sm position-relative">
             <i class="bi bi-shield-check me-1"></i> <?= __('moderation_queue') ?>
             <?php if (!empty($reviewCount) && $reviewCount > 0): ?>
                 <span class="badge bg-danger ms-2 rounded-pill"><?= $reviewCount ?></span>
@@ -64,7 +64,7 @@
                                         <?php else: ?>
                                             <form action="<?= BASE_URL ?>/admin/toggle_ban/<?= $u['id'] ?>/1" method="POST" class="d-inline" onsubmit="return confirm('Kullanıcı askıya alınsın mı?');"><button type="submit" class="btn btn-sm btn-warning" title="Kullanıcıyı Banla"><i class="bi bi-ban"></i></button></form>
                                         <?php endif; ?>
-                                    <form action="<?= BASE_URL ?>/admin/delete_user/<?= $u['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger">');" title="Kullanıcıyı Sil"><i class="bi bi-trash"></i></button></form>
+                                    <form action="<?= BASE_URL ?>/admin/delete_user/<?= (int)$u['id'] ?>" method="POST" class="d-inline" onsubmit="return confirm('<?= __('delete_user_confirm') ?>');"><button type="submit" class="btn btn-sm btn-danger" title="Kullanıcıyı Sil"><i class="bi bi-trash"></i></button></form>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                                 </td>
                                 <td class="text-end">
                                     <a href="<?= BASE_URL ?>/question/<?= $q['id'] ?>" class="btn btn-sm btn-info text-white" title="Görüntüle"><i class="bi bi-eye"></i></a>
-                                    <form action="<?= BASE_URL ?>/admin/delete_question/<?= $q['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger">');" title="Sil"><i class="bi bi-trash"></i></button></form>
+                                    <form action="<?= BASE_URL ?>/admin/delete_question/<?= (int)$q['id'] ?>" method="POST" class="d-inline" onsubmit="return confirm('<?= __('delete_confirm') ?>');"><button type="submit" class="btn btn-sm btn-danger" title="Sil"><i class="bi bi-trash"></i></button></form>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
