@@ -8,7 +8,7 @@
             <?php if (!empty($reviewCount) && $reviewCount > 0): ?>
                 <span class="badge bg-danger ms-2 rounded-pill"><?= $reviewCount ?></span>
             <?php endif; ?>
-        </button></form>
+        </a>
     </div>
 
     <!-- Kullanıcılar -->
