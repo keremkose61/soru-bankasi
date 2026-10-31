@@ -82,6 +82,7 @@ switch ($base_path) {
         break;
         
     case '/logout':
+        require_post_method();
         require 'controllers/AuthController.php';
         $controller = new AuthController();
         $controller->logout();
@@ -166,6 +167,8 @@ switch ($base_path) {
         break;
 
     case (preg_match('/^\/question\/(\d+)\/comment\/(\d+)\/delete$/', $base_path, $matches) ? true : false):
+        require_post_method();
+        require_post_method();
         require 'controllers/QuestionController.php';
         $controller = new QuestionController();
         $controller->deleteComment($matches[1], $matches[2]);
@@ -196,6 +199,7 @@ switch ($base_path) {
         break;
 
     case (preg_match('/^\/question\/(\d+)\/best-answer\/(\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/QuestionController.php';
         $controller = new QuestionController();
         $controller->markBestAnswer($matches[1], $matches[2]);
@@ -232,6 +236,7 @@ switch ($base_path) {
         break;
 
     case '/notifications/read':
+        require_post_method();
         require 'controllers/NotificationController.php';
         $controller = new NotificationController();
         $controller->markAsRead();
@@ -250,6 +255,7 @@ switch ($base_path) {
         break;
 
     case (preg_match('/^\/admin\/report\/(\d+)\/(pending|resolved|dismissed)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         $controller->updateReportStatus($matches[1], $matches[2]);
@@ -262,6 +268,7 @@ switch ($base_path) {
         break;
         
     case (preg_match('/^\/admin\/moderation\/(approve|reject)\/(question|answer)\/(\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         if ($matches[1] === 'approve') {
@@ -272,24 +279,28 @@ switch ($base_path) {
         break;
 
     case (preg_match('/^\/admin\/delete_question\/(\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         $controller->deleteQuestion($matches[1]);
         break;
 
     case (preg_match('/^\/admin\/delete_user\/(\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         $controller->deleteUser($matches[1]);
         break;
         
     case (preg_match('/^\/admin\/toggle_ban\/(\d+)\/(\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         $controller->toggleBan($matches[1], $matches[2]);
         break;
 
     case (preg_match('/^\/admin\/toggle_role\/(\d+)\/(student|teacher)$/', $base_path, $matches) ? true : false):
+        require_post_method();
         require 'controllers/AdminController.php';
         $controller = new AdminController();
         $controller->toggleRole($matches[1], $matches[2]);
