@@ -3,7 +3,7 @@
 [![PHP](https://img.shields.io/badge/PHP-Backend-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![PWA](https://img.shields.io/badge/PWA-Supported-5A0FC8?logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
-[![License](https://img.shields.io/badge/License-Not%20specified-lightgrey)](#lisans)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **BrainBoost**, öğrencilerin ve öğretmenlerin eğitim içerikleri etrafında bir araya gelmesini amaçlayan PHP ve MySQL tabanlı bir soru paylaşım ve çalışma platformudur. Kullanıcılar soru paylaşabilir, çözümler üzerinde etkileşim kurabilir ve çalışma süreçlerini Pomodoro araçlarıyla takip edebilir.
 
@@ -133,4 +133,4 @@ Aşağıda uygulamanın arayüzünden alınan ekran görüntüleri yer almaktad�
 
 ## Lisans
 
-Bu depoda henüz bir lisans dosyası bulunmuyor. Lisans belirtilene kadar kodun yeniden kullanımı ve dağıtımı için açık izin verildiği varsayılmamalıdır.
+Bu proje [MIT Lisansı](LICENSE) altında yayımlanmıştır. Ayrıntılar için depodaki `LICENSE` dosyasına bakabilirsiniz.
