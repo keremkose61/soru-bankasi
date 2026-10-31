@@ -39,24 +39,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="form-label text-dark fw-bold small mb-2"><?= __('login_type') ?></label>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <input type="radio" class="btn-check" name="role" id="roleStudent" value="student" checked autocomplete="off">
-                                <label class="btn btn-outline-primary w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2" for="roleStudent">
-                                    <i class="bi bi-mortarboard"></i> <?= __('student') ?>
-                                </label>
-                            </div>
-                            <div class="col-6">
-                                <input type="radio" class="btn-check" name="role" id="roleTeacher" value="teacher" autocomplete="off">
-                                <label class="btn btn-outline-secondary w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2" for="roleTeacher">
-                                    <i class="bi bi-person-workspace"></i> <?= __('teacher') ?>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm transition-all hover-lift mb-3">
                         <?= __('login_btn') ?> <i class="bi bi-arrow-right ms-2"></i>
                     </button>
