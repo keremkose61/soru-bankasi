@@ -201,7 +201,7 @@ if (isset($_SESSION['mod_notice'])) {
                             <?php if(isset($_SESSION['user_id']) && $_SESSION['user_id'] != $ans['user_id'] && $_SESSION['role'] !== 'admin'): ?>
                                 <a href="<?= BASE_URL ?>/messages/<?= $ans['user_id'] ?>" class="btn btn-sm btn-link text-decoration-none py-0 px-1 text-muted" title="Özel Mesaj Gönder">
                                     <i class="bi bi-chat-dots"></i>
-                                </a>
+                                </button></form>
                             <?php endif; ?>
                         </div>
                         <div>
@@ -272,7 +272,7 @@ if (isset($_SESSION['mod_notice'])) {
                                             <?php if (isset($_SESSION['user_id']) && ($_SESSION['user_id'] == $c['user_id'] || (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'))): ?>
                                                 <form action="<?= BASE_URL ?>/question/<?= (int)$question['id'] ?>/comment/<?= (int)$c['id'] ?>/delete" method="POST" class="d-inline" onsubmit="return confirm('Bu yorumu silmek istediğinize emin misiniz?');"><button type="submit" class="btn btn-link text-danger small p-0" title="Sil">
                                                     <i class="bi bi-trash"></i>
-                                                </a>
+                                                </button></form>
                                             <?php endif; ?>
                                         </div>
                                         <div class="small text-secondary" style="line-height: 1.4;">
