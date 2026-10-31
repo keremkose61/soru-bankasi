@@ -1,5 +1,12 @@
 <?php
 require_once 'config.php';
+require_once __DIR__ . '/core/Security.php';
+
+// Validate every state-changing POST request before routing it.
+csrf_validate_request();
+
+// Add CSRF tokens to rendered forms and same-origin AJAX requests.
+ob_start('csrf_inject_html');
 require_once 'models/User.php';
 
 if (isset($_SESSION['user_id'])) {
