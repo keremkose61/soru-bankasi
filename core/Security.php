@@ -85,3 +85,14 @@ if (!function_exists('csrf_inject_html')) {
         return $html;
     }
 }
+
+if (!function_exists('require_post_method')) {
+    function require_post_method() {
+        if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+            http_response_code(405);
+            header('Allow: POST');
+            header('Content-Type: text/plain; charset=utf-8');
+            exit('Bu işlem yalnızca POST isteğiyle gerçekleştirilebilir.');
+        }
+    }
+}
