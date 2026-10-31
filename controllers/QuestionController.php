@@ -204,17 +204,24 @@ class QuestionController {
                         'answer_images',
                         ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
                     );
-                } elseif (!empty($_POST['canvas_drawing']) && strpos($_POST['canvas_drawing'], 'data:image') === 0) {
-                    $canvasData = $_POST['canvas_drawing'];
-                    $canvasData = preg_replace('/^data:image\/\w+;base64,/', '', $canvasData);
-                    $decoded = base64_decode($canvasData);
-                    if ($decoded !== false) {
+                } elseif (!empty($_POST['canvas_drawing']) && strpos($_POST['canvas_drawing'], 'data:image/png;base64,') === 0) {
+                    // Only accept a real PNG image from the drawing canvas (max 5 MB).
+                    $canvasData = substr($_POST['canvas_drawing'], strlen('data:image/png;base64,'));
+                    $decoded = base64_decode($canvasData, true);
+                    $imageInfo = $decoded !== false ? @getimagesizefromstring($decoded) : false;
+
+                    if (
+                        $decoded !== false &&
+                        strlen($decoded) <= 5 * 1024 * 1024 &&
+                        $imageInfo !== false &&
+                        $imageInfo['mime'] === 'image/png'
+                    ) {
                         $target_dir = UPLOAD_PATH . '/answer_images';
                         if (!is_dir($target_dir)) {
-                            mkdir($target_dir, 0777, true);
+                            mkdir($target_dir, 0755, true);
                         }
-                        $filename = 'wb_' . uniqid() . '.png';
-                        if (file_put_contents($target_dir . '/' . $filename, $decoded)) {
+                        $filename = 'wb_' . bin2hex(random_bytes(16)) . '.png';
+                        if (file_put_contents($target_dir . '/' . $filename, $decoded, LOCK_EX) !== false) {
                             $image_path = '/public/uploads/answer_images/' . $filename;
                         }
                     }
@@ -416,24 +423,54 @@ class QuestionController {
     }
 
     private function handleUpload($file, $folder, $allowed_types) {
-        $max_size = 5 * 1024 * 1024; // 5MB
+        $max_size = 5 * 1024 * 1024; // 5 MB
+        $allowed_folders = ['images', 'pdfs', 'answer_images'];
 
-        if ($file['size'] > $max_size) {
+        if (
+            !in_array($folder, $allowed_folders, true) ||
+            !is_array($file) ||
+            !isset($file['error'], $file['size'], $file['tmp_name']) ||
+            $file['error'] !== UPLOAD_ERR_OK ||
+            !is_uploaded_file($file['tmp_name']) ||
+            $file['size'] <= 0 ||
+            $file['size'] > $max_size
+        ) {
             return null;
         }
 
-        if (!in_array($file['type'], $allowed_types)) {
+        // Never trust the browser-provided MIME type or the original filename.
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        if ($finfo === false) {
             return null;
         }
 
-        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $filename = uniqid() . '.' . $ext;
-        
+        $detected_type = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $extension_by_mime = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+            'image/gif' => 'gif',
+            'application/pdf' => 'pdf',
+        ];
+
+        if (
+            $detected_type === false ||
+            !in_array($detected_type, $allowed_types, true) ||
+            !isset($extension_by_mime[$detected_type])
+        ) {
+            return null;
+        }
+
+        $extension = $extension_by_mime[$detected_type];
+        $filename = bin2hex(random_bytes(16)) . '.' . $extension;
+
         $target_dir = UPLOAD_PATH . '/' . $folder;
-        if (!is_dir($target_dir)) {
-            mkdir($target_dir, 0777, true);
+        if (!is_dir($target_dir) && !mkdir($target_dir, 0755, true) && !is_dir($target_dir)) {
+            return null;
         }
-        
+
         $destination = $target_dir . '/' . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $destination)) {
