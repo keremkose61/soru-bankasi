@@ -125,17 +125,12 @@
                             <a href="<?= BASE_URL ?>/question/<?= $q['id'] ?>" class="btn btn-sm btn-glass-outline rounded-pill" target="_blank">
                                 <i class="bi bi-eye me-1"></i><?= __('view') ?>
                             </a>
-                            <a href="<?= BASE_URL ?>/admin/moderation/approve/question/<?= $q['id'] ?>"
-                               class="btn btn-sm rounded-pill text-white fw-semibold"
-                               style="background:linear-gradient(135deg,#10b981,#059669);"
-                               onclick="return confirm('<?= __('confirm_approve') ?>')">
+                            <form action="<?= BASE_URL ?>/admin/moderation/approve/question/<?= $q['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm rounded-pill text-white fw-semibold">')">
                                 <i class="bi bi-check-lg me-1"></i><?= __('moderation_approve') ?>
-                            </a>
-                            <a href="<?= BASE_URL ?>/admin/moderation/reject/question/<?= $q['id'] ?>"
-                               class="btn btn-sm btn-danger rounded-pill fw-semibold"
-                               onclick="return confirm('<?= __('confirm_reject') ?>')">
+                            </button></form>
+                            <form action="<?= BASE_URL ?>/admin/moderation/reject/question/<?= $q['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger rounded-pill fw-semibold">')">
                                 <i class="bi bi-x-lg me-1"></i><?= __('moderation_reject') ?>
-                            </a>
+                            </button></form>
                         </div>
                     </div>
                 </div>
@@ -191,17 +186,12 @@
                             <a href="<?= BASE_URL ?>/question/<?= $a['question_id'] ?>" class="btn btn-sm btn-glass-outline rounded-pill" target="_blank">
                                 <i class="bi bi-eye me-1"></i><?= __('view') ?>
                             </a>
-                            <a href="<?= BASE_URL ?>/admin/moderation/approve/answer/<?= $a['id'] ?>"
-                               class="btn btn-sm rounded-pill text-white fw-semibold"
-                               style="background:linear-gradient(135deg,#10b981,#059669);"
-                               onclick="return confirm('<?= __('confirm_approve') ?>')">
+                            <form action="<?= BASE_URL ?>/admin/moderation/approve/answer/<?= $a['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm rounded-pill text-white fw-semibold">')">
                                 <i class="bi bi-check-lg me-1"></i><?= __('moderation_approve') ?>
-                            </a>
-                            <a href="<?= BASE_URL ?>/admin/moderation/reject/answer/<?= $a['id'] ?>"
-                               class="btn btn-sm btn-danger rounded-pill fw-semibold"
-                               onclick="return confirm('<?= __('confirm_reject') ?>')">
+                            </button></form>
+                            <form action="<?= BASE_URL ?>/admin/moderation/reject/answer/<?= $a['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger rounded-pill fw-semibold">')">
                                 <i class="bi bi-x-lg me-1"></i><?= __('moderation_reject') ?>
-                            </a>
+                            </button></form>
                         </div>
                     </div>
                 </div>
@@ -235,12 +225,9 @@
                             <p class="small mb-0 text-muted" style="white-space:pre-wrap;"><?= htmlspecialchars(mb_substr($q['description'] ?? '', 0, 150)) ?></p>
                         </div>
                         <div class="d-flex flex-column gap-2">
-                            <a href="<?= BASE_URL ?>/admin/moderation/approve/question/<?= $q['id'] ?>"
-                               class="btn btn-sm rounded-pill text-white fw-semibold"
-                               style="background:linear-gradient(135deg,#10b981,#059669);"
-                               onclick="return confirm('<?= __('confirm_approve') ?>')">
+                            <form action="<?= BASE_URL ?>/admin/moderation/approve/question/<?= $q['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm rounded-pill text-white fw-semibold">')">
                                 <i class="bi bi-check-lg me-1"></i><?= __('moderation_approve') ?>
-                            </a>
+                            </button></form>
                         </div>
                     </div>
                 </div>
@@ -269,12 +256,9 @@
                             <p class="small mb-0 text-muted" style="white-space:pre-wrap;"><?= htmlspecialchars(mb_substr($a['content'], 0, 200)) ?></p>
                         </div>
                         <div class="d-flex flex-column gap-2">
-                            <a href="<?= BASE_URL ?>/admin/moderation/approve/answer/<?= $a['id'] ?>"
-                               class="btn btn-sm rounded-pill text-white fw-semibold"
-                               style="background:linear-gradient(135deg,#10b981,#059669);"
-                               onclick="return confirm('<?= __('confirm_approve') ?>')">
+                            <form action="<?= BASE_URL ?>/admin/moderation/approve/answer/<?= $a['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm rounded-pill text-white fw-semibold">')">
                                 <i class="bi bi-check-lg me-1"></i><?= __('moderation_approve') ?>
-                            </a>
+                            </button></form>
                         </div>
                     </div>
                 </div>
