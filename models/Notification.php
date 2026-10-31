@@ -20,7 +20,16 @@ class Notification {
     }
 
     public function getUnread($user_id) {
-        $stmt = $this->db->prepare("SELECT * FROM notifications WHERE user_id = :user_id AND is_read = 0 ORDER BY created_at DESC");
+        // Bildirimler soru sayfasına yönlendirildiği için silinmiş sorulara ait
+        // eski bildirimleri listeleme.
+        $stmt = $this->db->prepare("
+            SELECT n.*
+            FROM notifications n
+            INNER JOIN questions q ON q.id = n.content_id
+            WHERE n.user_id = :user_id
+              AND n.is_read = 0
+            ORDER BY n.created_at DESC
+        ");
         $stmt->execute([':user_id' => $user_id]);
         return $stmt->fetchAll();
     }
