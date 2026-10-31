@@ -33,10 +33,6 @@ switch ($base_path) {
         $controller = new QuestionController();
         $controller->index();
         break;
-        
-    case '/migrate':
-        require 'public/migrate_v4.php';
-        break;
 
     case '/manifest.json':
         header('Content-Type: application/manifest+json; charset=utf-8');
