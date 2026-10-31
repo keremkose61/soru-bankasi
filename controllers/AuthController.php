@@ -46,18 +46,12 @@ class AuthController {
                     require __DIR__ . '/../views/login.php';
                     return;
                 }
-                $selectedRole = $_POST['role'] ?? 'student';
-                
-                // Allow role override if not admin
-                if ($user['role'] !== 'admin' && in_array($selectedRole, ['student', 'teacher'])) {
-                    $roleToSet = $selectedRole;
-                } else {
-                    $roleToSet = $user['role'];
-                }
+                // Prevent session fixation and always trust the role stored in the database.
+                session_regenerate_id(true);
 
-                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_id'] = (int) $user['id'];
                 $_SESSION['username'] = $user['username'];
-                $_SESSION['role'] = $roleToSet;
+                $_SESSION['role'] = $user['role'];
                 $_SESSION['profile_photo'] = $user['profile_photo'] ?? null;
                 $_SESSION['cover_photo'] = $user['cover_photo'] ?? null;
 
