@@ -139,7 +139,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="<?= BASE_URL ?>/profile"><i class="bi bi-person"></i> <?= __('my_profile') ?></a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/logout"><i class="bi bi-box-arrow-right"></i> <?= __('logout') ?></a></li>
+                            <li><form action="<?= BASE_URL ?>/logout" method="POST" class="m-0"><button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right"></i> <?= __('logout') ?></button></form></li>
                         </ul>
                     </li>
                 <?php else: ?>
