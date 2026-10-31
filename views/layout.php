@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     notifDropdown.addEventListener('click', function() {
         if(notifBadge.style.display !== 'none') {
-            fetch('<?= BASE_URL ?>/notifications/read').then(() => {
+            fetch('<?= BASE_URL ?>/notifications/read', { method: 'POST' }).then(() => {
                 notifBadge.style.display = 'none';
             });
         }
