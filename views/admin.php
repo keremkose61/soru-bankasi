@@ -3,12 +3,12 @@
 <div class="row">
     <div class="col-12 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
         <h2 class="fw-bold mb-0"><i class="bi bi-shield-lock text-warning"></i> <?= __('admin_dashboard') ?></h2>
-        <a href="<?= BASE_URL ?>/admin/moderation" class="btn btn-outline-primary rounded-pill px-4 shadow-sm position-relative">
+        <form action="<?= BASE_URL ?>/admin/moderation" method="POST" class="d-inline"><button type="submit" class="btn btn-outline-primary rounded-pill px-4 shadow-sm position-relative">
             <i class="bi bi-shield-check me-1"></i> <?= __('moderation_queue') ?>
             <?php if (!empty($reviewCount) && $reviewCount > 0): ?>
                 <span class="badge bg-danger ms-2 rounded-pill"><?= $reviewCount ?></span>
             <?php endif; ?>
-        </a>
+        </button></form>
     </div>
 
     <!-- Kullanıcılar -->
@@ -50,21 +50,21 @@
                                     <?php if($u['role'] !== 'admin'): ?>
                                         <!-- Rol Değiştirme Butonu -->
                                         <?php if ($u['role'] === 'student'): ?>
-                                            <a href="<?= BASE_URL ?>/admin/toggle_role/<?= $u['id'] ?>/teacher" class="btn btn-sm btn-outline-info" title="Öğretmen Yetkisi Ver" onclick="return confirm('Bu kullanıcıya Öğretmen rolü atansın mı?');">
+                                            <form action="<?= BASE_URL ?>/admin/toggle_role/<?= $u['id'] ?>/teacher" method="POST" class="d-inline" onsubmit="return confirm('Bu kullanıcıya Öğretmen rolü atansın mı?');"><button type="submit" class="btn btn-sm btn-outline-info" title="Öğretmen Yetkisi Ver">
                                                 <i class="bi bi-mortarboard"></i>
-                                            </a>
+                                            </button></form>
                                         <?php else: ?>
-                                            <a href="<?= BASE_URL ?>/admin/toggle_role/<?= $u['id'] ?>/student" class="btn btn-sm btn-outline-secondary" title="Öğrenciye Çevir" onclick="return confirm('Bu kullanıcı Öğrenci rolüne çekilsin mi?');">
+                                            <form action="<?= BASE_URL ?>/admin/toggle_role/<?= $u['id'] ?>/student" method="POST" class="d-inline" onsubmit="return confirm('Bu kullanıcı Öğrenci rolüne çekilsin mi?');"><button type="submit" class="btn btn-sm btn-outline-secondary" title="Öğrenciye Çevir">
                                                 <i class="bi bi-person"></i>
-                                            </a>
+                                            </button></form>
                                         <?php endif; ?>
 
                                         <?php if(isset($u['is_banned']) && $u['is_banned']): ?>
-                                            <a href="<?= BASE_URL ?>/admin/toggle_ban/<?= $u['id'] ?>/0" class="btn btn-sm btn-success" title="Engeli Kaldır"><i class="bi bi-unlock"></i></a>
+                                            <form action="<?= BASE_URL ?>/admin/toggle_ban/<?= $u['id'] ?>/0" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-success" title="Engeli Kaldır"><i class="bi bi-unlock"></i></button></form>
                                         <?php else: ?>
-                                            <a href="<?= BASE_URL ?>/admin/toggle_ban/<?= $u['id'] ?>/1" class="btn btn-sm btn-warning" onclick="return confirm('Kullanıcı askıya alınsın mı?');" title="Kullanıcıyı Banla"><i class="bi bi-ban"></i></a>
+                                            <form action="<?= BASE_URL ?>/admin/toggle_ban/<?= $u['id'] ?>/1" method="POST" class="d-inline" onsubmit="return confirm('Kullanıcı askıya alınsın mı?');"><button type="submit" class="btn btn-sm btn-warning" title="Kullanıcıyı Banla"><i class="bi bi-ban"></i></button></form>
                                         <?php endif; ?>
-                                    <a href="<?= BASE_URL ?>/admin/delete_user/<?= $u['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('<?= __('delete_user_confirm') ?>');" title="Kullanıcıyı Sil"><i class="bi bi-trash"></i></a>
+                                    <form action="<?= BASE_URL ?>/admin/delete_user/<?= $u['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger">');" title="Kullanıcıyı Sil"><i class="bi bi-trash"></i></button></form>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                                 </td>
                                 <td class="text-end">
                                     <a href="<?= BASE_URL ?>/question/<?= $q['id'] ?>" class="btn btn-sm btn-info text-white" title="Görüntüle"><i class="bi bi-eye"></i></a>
-                                    <a href="<?= BASE_URL ?>/admin/delete_question/<?= $q['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('<?= __('delete_confirm') ?>');" title="Sil"><i class="bi bi-trash"></i></a>
+                                    <form action="<?= BASE_URL ?>/admin/delete_question/<?= $q['id'] ?>" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-danger">');" title="Sil"><i class="bi bi-trash"></i></button></form>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -166,8 +166,8 @@
                                 <td><?= date('d.m.Y H:i', strtotime($r['created_at'])) ?></td>
                                 <td class="text-end">
                                     <?php if($r['status'] === 'pending'): ?>
-                                        <a href="<?= BASE_URL ?>/admin/report/<?= $r['id'] ?>/resolved" class="btn btn-sm btn-success" title="Çözüldü İşaretle"><i class="bi bi-check-circle"></i></a>
-                                        <a href="<?= BASE_URL ?>/admin/report/<?= $r['id'] ?>/dismissed" class="btn btn-sm btn-secondary" title="Reddet"><i class="bi bi-x-circle"></i></a>
+                                        <form action="<?= BASE_URL ?>/admin/report/<?= $r['id'] ?>/resolved" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-success" title="Çözüldü İşaretle"><i class="bi bi-check-circle"></i></button></form>
+                                        <form action="<?= BASE_URL ?>/admin/report/<?= $r['id'] ?>/dismissed" method="POST" class="d-inline"><button type="submit" class="btn btn-sm btn-secondary" title="Reddet"><i class="bi bi-x-circle"></i></button></form>
                                     <?php else: ?>
                                         <span class="text-muted"><i class="bi bi-check2-all"></i> İşlem Yapıldı</span>
                                     <?php endif; ?>
