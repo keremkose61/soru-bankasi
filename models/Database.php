@@ -12,7 +12,9 @@ class Database {
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->ensureSchema();
         } catch(PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
+            error_log('Database connection failed: ' . $e->getMessage());
+            http_response_code(500);
+            exit('Veritabanına şu anda bağlanılamıyor. Lütfen daha sonra tekrar deneyin.');
         }
     }
 
