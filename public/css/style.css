@@ -656,3 +656,151 @@ pre, code { max-width: 100%; overflow-wrap: anywhere; }
     .bb-menu-trigger { margin-right: 10px !important; }
     .navbar-brand { margin-right: 0; }
 }
+
+
+/* BrainBoost left hamburger navigation */
+.bb-topbar {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 68px;
+    border-radius: 18px;
+}
+.bb-menu-trigger {
+    width: 44px;
+    height: 44px;
+    display: inline-grid;
+    place-items: center;
+    color: var(--bb-text);
+    background: var(--bb-page);
+    border: 1px solid var(--bb-border);
+    border-radius: 13px;
+    font-size: 1.45rem;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.bb-menu-trigger:hover {
+    color: #fff;
+    background: var(--primary-color);
+    transform: translateY(-1px);
+}
+.bb-topbar-caption { color: var(--bb-muted); font-size: .88rem; font-weight: 600; }
+.bb-sidebar {
+    width: min(320px, 88vw) !important;
+    color: var(--bb-text);
+    background: var(--bb-surface);
+    border: 0;
+    box-shadow: 18px 0 50px rgba(15, 23, 42, .14);
+}
+.bb-sidebar-header {
+    padding: 1.35rem 1.25rem;
+    border-bottom: 1px solid var(--bb-border);
+}
+.bb-sidebar-header .navbar-brand { color: var(--bb-text); }
+.bb-sidebar .offcanvas-body { padding: 1.25rem; }
+.bb-sidebar-tools {
+    padding: 14px;
+    background: var(--bb-page);
+    border: 1px solid var(--bb-border);
+    border-radius: 15px;
+}
+.bb-sidebar-label {
+    color: var(--bb-muted);
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+.bb-sidebar-icon-btn {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    color: var(--bb-text);
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-border);
+    border-radius: 10px;
+}
+.bb-sidebar-nav { gap: 5px; }
+.bb-sidebar-nav .nav-link,
+.bb-sidebar-footer > .nav-link,
+.bb-sidebar-footer form .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 46px;
+    padding: 10px 13px;
+    color: var(--bb-text);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: .92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .18s ease, background .18s ease, border-color .18s ease;
+}
+.bb-sidebar-nav .nav-link > i,
+.bb-sidebar-footer > .nav-link > i,
+.bb-sidebar-footer form .nav-link > i {
+    width: 21px;
+    color: var(--primary-color);
+    font-size: 1.08rem;
+    text-align: center;
+}
+.bb-sidebar-nav .nav-link:hover,
+.bb-sidebar-footer > .nav-link:hover,
+.bb-sidebar-footer form .nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .09);
+    border-color: rgba(var(--primary-rgb), .13);
+}
+.bb-sidebar-footer {
+    border-top: 1px solid var(--bb-border);
+}
+.bb-sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px;
+    background: var(--bb-page);
+    border: 1px solid var(--bb-border);
+    border-radius: 13px;
+}
+.bb-sidebar-user img,
+.bb-user-fallback {
+    width: 39px;
+    height: 39px;
+    flex: 0 0 39px;
+    display: grid;
+    place-items: center;
+    object-fit: cover;
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .12);
+    border-radius: 50%;
+    font-size: 1.35rem;
+}
+.bb-sidebar-user strong,
+.bb-sidebar-user small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bb-sidebar-user strong { color: var(--bb-text); font-size: .88rem; }
+.bb-sidebar-user small { color: var(--bb-muted); font-size: .73rem; }
+.bb-notif-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin-top: 5px !important;
+    padding: 8px;
+    color: var(--bb-text);
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-border);
+    border-radius: 12px;
+    box-shadow: none !important;
+}
+.bb-notif-menu .dropdown-item {
+    color: var(--bb-text);
+    white-space: normal;
+    border-radius: 8px;
+}
+.bb-notif-menu .dropdown-item:hover { background: var(--bb-page); }
+[data-bs-theme="dark"] .bb-sidebar .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+@media (max-width: 575.98px) {
+    .bb-topbar { margin-top: .65rem !important; margin-bottom: 1rem !important; min-height: 60px; border-radius: 15px; }
+    .bb-menu-trigger { width: 40px; height: 40px; }
+    .bb-topbar .navbar-brand { font-size: 1.05rem; }
+}
