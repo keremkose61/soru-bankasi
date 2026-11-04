@@ -15,7 +15,7 @@
                 <?php if (isset($error)): ?>
                     <div class="alert alert-danger border-0 shadow-sm d-flex align-items-center">
                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <div><?= $error ?></div>
+                        <div><?= htmlspecialchars((string)$error, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></div>
                     </div>
                 <?php endif; ?>
 
