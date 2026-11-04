@@ -622,9 +622,9 @@ pre, code { max-width: 100%; overflow-wrap: anywhere; }
     border-bottom: 1px solid var(--bb-border);
 }
 .bb-sidebar .offcanvas-body { padding: 18px 14px; }
-.bb-sidebar-nav {
+.bb-sidebar .bb-sidebar-nav {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: stretch !important;
     gap: 5px;
 }
