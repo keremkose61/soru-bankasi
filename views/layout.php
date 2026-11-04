@@ -42,6 +42,15 @@
             <img src="<?= BASE_URL ?>/public/images/logo.png" alt="BrainBoost Logo" width="32" height="32" class="me-2 rounded">
             BrainBoost
         </a>
+        <div class="bb-topbar-actions d-flex align-items-center gap-2">
+            <div class="lang-switcher-wrapper">
+                <a href="?lang=tr" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'tr' ? 'active' : '' ?>" aria-label="Türkçe">TR</a>
+                <a href="?lang=en" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'en' ? 'active' : '' ?>" aria-label="English">EN</a>
+            </div>
+            <button class="btn btn-sm bb-sidebar-icon-btn" id="theme-toggle" type="button" aria-label="<?= __('theme_toggle') ?>" title="<?= __('theme_toggle') ?>">
+                <i class="bi bi-moon-fill" id="theme-icon"></i>
+            </button>
+        </div>
     </div>
 </nav>
 
@@ -64,19 +73,6 @@ if (isset($_SESSION['user_id'])) {
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column">
-        <div class="bb-sidebar-tools mb-4">
-            <div class="d-flex align-items-center justify-content-between gap-2">
-                <span class="bb-sidebar-label">GÖRÜNÜM</span>
-                <button class="btn btn-sm bb-sidebar-icon-btn" id="theme-toggle" type="button" aria-label="<?= __('theme_toggle') ?>" title="<?= __('theme_toggle') ?>">
-                    <i class="bi bi-moon-fill" id="theme-icon"></i>
-                </button>
-            </div>
-            <div class="lang-switcher-wrapper mt-2">
-                <a href="?lang=tr" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'tr' ? 'active' : '' ?>">TR</a>
-                <a href="?lang=en" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'en' ? 'active' : '' ?>">EN</a>
-            </div>
-        </div>
-
         <div class="bb-sidebar-label mb-2">MENÜ</div>
         <ul class="navbar-nav bb-sidebar-nav">
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/"><i class="bi bi-house-door"></i><span><?= __('home_link') ?></span></a></li>
