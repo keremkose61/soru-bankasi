@@ -804,3 +804,20 @@ pre, code { max-width: 100%; overflow-wrap: anywhere; }
     .bb-menu-trigger { width: 40px; height: 40px; }
     .bb-topbar .navbar-brand { font-size: 1.05rem; }
 }
+
+
+/* Centered brand with left-aligned hamburger */
+.bb-topbar-inner { position: relative; min-height: 52px; display: flex; align-items: center; }
+.bb-topbar-inner .bb-menu-trigger { position: relative; z-index: 2; }
+.bb-topbar-inner .bb-centered-brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    white-space: nowrap;
+}
+@media (max-width: 575.98px) {
+    .bb-topbar-inner .bb-centered-brand { font-size: 1rem; }
+    .bb-topbar-inner .bb-centered-brand img { width: 28px; height: 28px; }
+}
