@@ -110,7 +110,7 @@ class AuthController {
                 $error = "Şifre en az 6 karakter olmalıdır.";
             } else {
                 if ($this->userModel->updatePassword($user['id'], $password)) {
-                    $success = "Şifreniz başarıyla güncellendi. Şimdi <a href='" . BASE_URL . "/login' class='alert-link fw-bold'>giriş yapabilirsiniz</a>.";
+                    $success = "Şifreniz başarıyla güncellendi. Şimdi giriş yapabilirsiniz.";
                 } else {
                     $error = "Şifre güncellenirken bir hata oluştu.";
                 }
