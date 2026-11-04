@@ -34,15 +34,14 @@
 <body>
 
 <nav class="navbar navbar-glass mt-3 mb-4 bb-topbar">
-    <div class="container-fluid px-3 px-lg-4">
-        <button class="btn bb-menu-trigger me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#bbSidebar" aria-controls="bbSidebar" aria-label="Menüyü aç">
+    <div class="container-fluid px-3 px-lg-4 bb-topbar-inner">
+        <button class="btn bb-menu-trigger" type="button" data-bs-toggle="offcanvas" data-bs-target="#bbSidebar" aria-controls="bbSidebar" aria-label="Menüyü aç">
             <i class="bi bi-list"></i>
         </button>
-        <a class="navbar-brand fw-bold d-flex align-items-center me-auto" href="<?= BASE_URL ?>/">
+        <a class="navbar-brand fw-bold d-flex align-items-center bb-centered-brand" href="<?= BASE_URL ?>/">
             <img src="<?= BASE_URL ?>/public/images/logo.png" alt="BrainBoost Logo" width="32" height="32" class="me-2 rounded">
             BrainBoost
         </a>
-        <span class="bb-topbar-caption d-none d-md-inline">Öğren, paylaş, geliş.</span>
     </div>
 </nav>
 
