@@ -212,8 +212,18 @@
 
                     const bubble = document.createElement('div');
                     bubble.className = 'chat-bubble ' + (msg.is_mine ? 'outgoing' : 'incoming');
-                    bubble.innerHTML = msg.content.replace(/\n/g, '<br>') +
-                        '<span class="bubble-time">' + msg.created_at + '</span>';
+                    // Render user content as text nodes; never parse message text as HTML.
+                    const messageText = String(msg.content ?? '');
+                    const parts = messageText.split('\\n');
+                    parts.forEach((part, index) => {
+                        if (index > 0) bubble.appendChild(document.createElement('br'));
+                        bubble.appendChild(document.createTextNode(part));
+                    });
+
+                    const time = document.createElement('span');
+                    time.className = 'bubble-time';
+                    time.textContent = String(msg.created_at ?? '');
+                    bubble.appendChild(time);
 
                     if (!msg.is_mine) {
                         const av = document.createElement('div');
