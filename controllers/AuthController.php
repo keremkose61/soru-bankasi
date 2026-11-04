@@ -15,7 +15,9 @@ class AuthController {
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $password = $_POST['password'];
-            $role = $_POST['role'] ?? 'student';
+            $requestedRole = $_POST['role'] ?? 'student';
+            // Public registration may create students or teachers, never administrators.
+            $role = in_array($requestedRole, ['student', 'teacher'], true) ? $requestedRole : 'student';
 
             if ($this->userModel->register($username, $email, $password, $role)) {
                 header("Location: " . BASE_URL . "/login");
