@@ -33,132 +33,94 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-glass mt-3 mb-4">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="<?= BASE_URL ?>/">
-            <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Soru Bankası Logo" width="32" height="32" class="me-2 rounded">
-            Soru Bankası
-        </a>
+<nav class="navbar navbar-glass mt-3 mb-4 bb-topbar">
+    <div class="container-fluid px-3 px-lg-4">
         <button class="btn bb-menu-trigger me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#bbSidebar" aria-controls="bbSidebar" aria-label="Menüyü aç">
             <i class="bi bi-list"></i>
         </button>
-        <div class="offcanvas offcanvas-start bb-sidebar" tabindex="-1" id="bbSidebar" aria-labelledby="bbSidebarLabel">
-            <div class="offcanvas-header">
-                <div class="d-flex align-items-center gap-2" id="bbSidebarLabel">
-                    <img src="<?= BASE_URL ?>/public/images/logo.png" alt="" width="30" height="30" class="rounded">
-                    <span class="fw-bold">BrainBoost</span>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
-            </div>
-            <div class="offcanvas-body">
-            <ul class="navbar-nav bb-sidebar-nav">
-                <li class="nav-item me-3">
-                    <div class="lang-switcher-wrapper">
-                        <a href="?lang=tr" class="lang-link <?= $_SESSION['lang'] == 'tr' ? 'active' : '' ?>">TR</a>
-                        <a href="?lang=en" class="lang-link <?= $_SESSION['lang'] == 'en' ? 'active' : '' ?>">EN</a>
-                    </div>
-                </li>
-                <li class="nav-item me-2">
-                    <button class="btn btn-link nav-link px-2 d-flex align-items-center" id="theme-toggle" type="button" aria-label="<?= __('theme_toggle') ?>" title="<?= __('theme_toggle') ?>">
-                        <i class="bi bi-moon-fill" id="theme-icon" style="font-size: 1.1rem; transition: transform 0.3s ease;"></i>
-                    </button>
-                </li>
-                <li class="nav-item me-2" id="pwa-install-nav-item" style="display: none;">
-                    <button class="btn btn-sm btn-gradient rounded-pill px-3 py-1 shadow-sm fw-bold text-white d-flex align-items-center" id="pwa-install-btn" title="Uygulamayı Cihazınıza Yükleyin">
-                        <i class="bi bi-download me-1"></i> <span>Uygulamayı Yükle</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/"><?= __('home_link') ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/leaderboard"><i class="bi bi-trophy"></i> <?= __('leaderboard') ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/pomodoro"><i class="bi bi-stopwatch"></i> Pomodoro</a>
-                </li>
-                <?php if(isset($_SESSION['user_id'])): ?>
-                    <?php if($_SESSION['role'] !== 'teacher'): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>/question/create"><i class="bi bi-plus-circle"></i> <?= __('ask_question_btn') ?></a>
-                    </li>
-                    <?php endif; ?>
-                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <li class="nav-item">
-                            <a class="nav-link text-warning fw-bold ms-2" href="<?= BASE_URL ?>/admin"><?= __('admin_panel') ?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold ms-1 position-relative" href="<?= BASE_URL ?>/admin/moderation" title="<?= __('moderation_queue') ?>">
-                                <i class="bi bi-shield-check" style="font-size:1.1rem; color:var(--primary-color);"></i>
-                                <?php
-                                    // Show badge count for items in review queue
-                                    try {
-                                        require_once __DIR__ . '/../models/Question.php';
-                                        require_once __DIR__ . '/../models/Answer.php';
-                                        $qm = new Question(); $am = new Answer();
-                                        $rc = count($qm->getForModeration('review')) + count($am->getForModeration('review'));
-                                        if ($rc > 0): ?>
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:.6rem; min-width:18px;"><?= $rc ?></span>
-                                        <?php endif;
-                                    } catch(Exception $e) {}
-                                ?>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                    <?php
-                        // Mesaj badge sayısı
-                        $msgUnread = 0;
-                        try {
-                            if (!class_exists('Message')) {
-                                require_once __DIR__ . '/../models/Message.php';
-                            }
-                            $msgModel  = new Message();
-                            $msgUnread = $msgModel->getUnreadCount($_SESSION['user_id']);
-                        } catch(Exception $e) {}
-                    ?>
-                    <li class="nav-item me-1">
-                        <a class="nav-link position-relative px-2" href="<?= BASE_URL ?>/messages" title="<?= __('messages') ?>">
-                            <i class="bi bi-chat-dots-fill" style="font-size:1.2rem;color:var(--primary-color);"></i>
-                            <span id="msg-nav-badge"
-                                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                  style="font-size:.6rem;min-width:18px;<?= $msgUnread == 0 ? 'display:none;' : '' ?>">
-                                <?= $msgUnread ?: '' ?>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown me-2">
-                        <a class="nav-link position-relative px-2 dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Bildirimler">
-                            <i class="bi bi-bell-fill" style="font-size:1.2rem;color:var(--primary-color);"></i>
-                            <span id="notif-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:.6rem;min-width:18px;display:none;"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="notifDropdown" style="width: 300px; max-height: 400px; overflow-y: auto;" id="notif-list">
-                            <li><span class="dropdown-item text-muted text-center py-3">Bildirim yok</span></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown ms-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                            <?php if(!empty($_SESSION['profile_photo'])): ?>
-                                <img src="<?= BASE_URL . $_SESSION['profile_photo'] ?>" alt="" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover; vertical-align: middle;">
-                            <?php else: ?>
-                                <i class="bi bi-person-circle"></i>
-                            <?php endif; ?>
-                            <?= htmlspecialchars($_SESSION['username']) ?>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>/profile"><i class="bi bi-person"></i> <?= __('my_profile') ?></a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><form action="<?= BASE_URL ?>/logout" method="POST" class="m-0"><button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right"></i> <?= __('logout') ?></button></form></li>
-                        </ul>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item"><a class="nav-link btn btn-glass-outline btn-sm ms-2 fw-bold" href="<?= BASE_URL ?>/login"><?= __('login_btn') ?></a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-gradient btn-sm ms-2 fw-bold text-white" href="<?= BASE_URL ?>/register"><?= __('register_btn') ?></a></li>
-                <?php endif; ?>
-            </ul>
-            </div>
-        </div>
+        <a class="navbar-brand fw-bold d-flex align-items-center me-auto" href="<?= BASE_URL ?>/">
+            <img src="<?= BASE_URL ?>/public/images/logo.png" alt="BrainBoost Logo" width="32" height="32" class="me-2 rounded">
+            BrainBoost
+        </a>
+        <span class="bb-topbar-caption d-none d-md-inline">Öğren, paylaş, geliş.</span>
     </div>
 </nav>
+
+<?php
+$msgUnread = 0;
+if (isset($_SESSION['user_id'])) {
+    try {
+        if (!class_exists('Message')) require_once __DIR__ . '/../models/Message.php';
+        $msgModel = new Message();
+        $msgUnread = $msgModel->getUnreadCount($_SESSION['user_id']);
+    } catch (Exception $e) {}
+}
+?>
+<div class="offcanvas offcanvas-start bb-sidebar" tabindex="-1" id="bbSidebar" aria-labelledby="bbSidebarLabel">
+    <div class="offcanvas-header bb-sidebar-header">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="<?= BASE_URL ?>/">
+            <img src="<?= BASE_URL ?>/public/images/logo.png" alt="" width="34" height="34" class="me-2 rounded">
+            <span id="bbSidebarLabel">BrainBoost</span>
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+        <div class="bb-sidebar-tools mb-4">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+                <span class="bb-sidebar-label">GÖRÜNÜM</span>
+                <button class="btn btn-sm bb-sidebar-icon-btn" id="theme-toggle" type="button" aria-label="<?= __('theme_toggle') ?>" title="<?= __('theme_toggle') ?>">
+                    <i class="bi bi-moon-fill" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="lang-switcher-wrapper mt-2">
+                <a href="?lang=tr" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'tr' ? 'active' : '' ?>">TR</a>
+                <a href="?lang=en" class="lang-link <?= ($_SESSION['lang'] ?? 'tr') == 'en' ? 'active' : '' ?>">EN</a>
+            </div>
+        </div>
+
+        <div class="bb-sidebar-label mb-2">MENÜ</div>
+        <ul class="navbar-nav bb-sidebar-nav">
+            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/"><i class="bi bi-house-door"></i><span><?= __('home_link') ?></span></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/leaderboard"><i class="bi bi-trophy"></i><span><?= __('leaderboard') ?></span></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/pomodoro"><i class="bi bi-stopwatch"></i><span>Pomodoro</span></a></li>
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(($_SESSION['role'] ?? '') === 'teacher'): ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/#questions-section"><i class="bi bi-chat-dots"></i><span>Soruları İncele</span></a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/question/create"><i class="bi bi-plus-circle"></i><span><?= __('ask_question_btn') ?></span></a></li>
+                <?php endif; ?>
+                <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/messages"><i class="bi bi-chat-dots-fill"></i><span><?= __('messages') ?></span><span id="msg-nav-badge" class="badge rounded-pill bg-danger ms-auto" style="font-size:.65rem;<?= $msgUnread > 0 ? '' : 'display:none;' ?>"><?= $msgUnread ?: '' ?></span></a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bell-fill"></i><span>Bildirimler</span><span id="notif-badge" class="badge rounded-pill bg-danger ms-auto" style="display:none;"></span></a>
+                    <ul class="dropdown-menu bb-notif-menu shadow-sm" aria-labelledby="notifDropdown" id="notif-list"><li><span class="dropdown-item text-muted text-center py-3">Bildirim yok</span></li></ul>
+                </li>
+                <?php if(($_SESSION['role'] ?? '') === 'admin'): ?>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/admin"><i class="bi bi-shield-lock"></i><span><?= __('admin_panel') ?></span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/admin/moderation"><i class="bi bi-shield-check"></i><span><?= __('moderation_queue') ?></span></a></li>
+                <?php endif; ?>
+            <?php endif; ?>
+        </ul>
+
+        <div class="bb-sidebar-footer mt-auto pt-3">
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <div class="bb-sidebar-user mb-2">
+                    <?php if(!empty($_SESSION['profile_photo'])): ?>
+                        <img src="<?= BASE_URL . $_SESSION['profile_photo'] ?>" alt="" class="rounded-circle">
+                    <?php else: ?>
+                        <span class="bb-user-fallback"><i class="bi bi-person-circle"></i></span>
+                    <?php endif; ?>
+                    <div class="min-w-0"><strong><?= htmlspecialchars($_SESSION['username']) ?></strong><small>Hesabım</small></div>
+                </div>
+                <a class="nav-link" href="<?= BASE_URL ?>/profile"><i class="bi bi-person"></i><span><?= __('my_profile') ?></span></a>
+                <form action="<?= BASE_URL ?>/logout" method="POST" class="m-0"><button type="submit" class="nav-link w-100 text-start text-danger"><i class="bi bi-box-arrow-right"></i><span><?= __('logout') ?></span></button></form>
+            <?php else: ?>
+                <a class="btn btn-glass-outline w-100 mb-2" href="<?= BASE_URL ?>/login"><?= __('login_btn') ?></a>
+                <a class="btn btn-gradient text-white w-100" href="<?= BASE_URL ?>/register"><?= __('register_btn') ?></a>
+            <?php endif; ?>
+            <div id="pwa-install-nav-item" class="mt-3" style="display:none;"><button class="btn btn-gradient text-white w-100" id="pwa-install-btn"><i class="bi bi-download me-2"></i>Uygulamayı Yükle</button></div>
+        </div>
+    </div>
+</div>
 
 <div class="container my-5 animate-fade-in">
     <?= $content ?>
