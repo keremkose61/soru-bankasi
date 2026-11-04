@@ -39,11 +39,19 @@
             <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Soru Bankası Logo" width="32" height="32" class="me-2 rounded">
             Soru Bankası
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button class="btn bb-menu-trigger me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#bbSidebar" aria-controls="bbSidebar" aria-label="Menüyü aç">
+            <i class="bi bi-list"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+        <div class="offcanvas offcanvas-start bb-sidebar" tabindex="-1" id="bbSidebar" aria-labelledby="bbSidebarLabel">
+            <div class="offcanvas-header">
+                <div class="d-flex align-items-center gap-2" id="bbSidebarLabel">
+                    <img src="<?= BASE_URL ?>/public/images/logo.png" alt="" width="30" height="30" class="rounded">
+                    <span class="fw-bold">BrainBoost</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+            </div>
+            <div class="offcanvas-body">
+            <ul class="navbar-nav bb-sidebar-nav">
                 <li class="nav-item me-3">
                     <div class="lang-switcher-wrapper">
                         <a href="?lang=tr" class="lang-link <?= $_SESSION['lang'] == 'tr' ? 'active' : '' ?>">TR</a>
@@ -147,6 +155,7 @@
                     <li class="nav-item"><a class="nav-link btn btn-gradient btn-sm ms-2 fw-bold text-white" href="<?= BASE_URL ?>/register"><?= __('register_btn') ?></a></li>
                 <?php endif; ?>
             </ul>
+            </div>
         </div>
     </div>
 </nav>
