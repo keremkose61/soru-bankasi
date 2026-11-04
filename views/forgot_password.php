@@ -12,7 +12,7 @@
                 <?php endif; ?>
                 
                 <?php if (isset($success)): ?>
-                    <div class="alert alert-success" style="border-radius: 15px;"><i class="bi bi-check-circle-fill me-2"></i><?= $success ?></div>
+                    <div class="alert alert-success" style="border-radius: 15px;"><i class="bi bi-check-circle-fill me-2"></i><?= htmlspecialchars((string)$success, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></div>
                 <?php else: ?>
                     <form method="POST" action="<?= BASE_URL ?>/forgot-password">
                         <div class="mb-4">
