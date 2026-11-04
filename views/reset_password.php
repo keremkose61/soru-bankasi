@@ -11,7 +11,7 @@
                 <?php endif; ?>
                 
                 <?php if (isset($success)): ?>
-                    <div class="alert alert-success" style="border-radius: 15px;"><i class="bi bi-check-circle-fill me-2"></i><?= $success ?></div>
+                    <div class="alert alert-success" style="border-radius: 15px;"><i class="bi bi-check-circle-fill me-2"></i><?= htmlspecialchars((string)$success, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></div>
                 <?php else: ?>
                     <p class="text-center text-muted mb-4">Lütfen yeni şifrenizi girin. Şifrenizin en az 6 karakter olmasına dikkat edin.</p>
                     <form method="POST" action="<?= BASE_URL ?>/reset-password?token=<?= htmlspecialchars($_GET['token'] ?? '') ?>">
