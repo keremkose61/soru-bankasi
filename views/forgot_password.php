@@ -8,7 +8,7 @@
                 <p class="text-center text-muted mb-4">Lütfen kayıtlı olduğunuz e-posta adresinizi girin. Size bir sıfırlama bağlantısı oluşturacağız.</p>
 
                 <?php if (isset($error)): ?>
-                    <div class="alert alert-danger" style="border-radius: 15px;"><i class="bi bi-exclamation-triangle-fill me-2"></i><?= $error ?></div>
+                    <div class="alert alert-danger" style="border-radius: 15px;"><i class="bi bi-exclamation-triangle-fill me-2"></i><?= htmlspecialchars((string)$error, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></div>
                 <?php endif; ?>
                 
                 <?php if (isset($success)): ?>
