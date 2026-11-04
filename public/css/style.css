@@ -534,3 +534,54 @@ pre, code { max-width: 100%; overflow-wrap: anywhere; }
         transition-duration: .01ms !important;
     }
 }
+
+
+/* BrainBoost dashboard quick actions */
+.bb-section-eyebrow {
+    display: inline-block;
+    margin-bottom: .35rem;
+    color: var(--primary-color);
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+.bb-action-card {
+    min-height: 104px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 18px;
+    color: var(--bb-text);
+    text-decoration: none;
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-border);
+    border-radius: 16px;
+    box-shadow: var(--bb-shadow);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.bb-action-card:hover {
+    color: var(--bb-text);
+    border-color: rgba(var(--primary-rgb), .45);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(24, 32, 51, .09);
+}
+.bb-action-icon {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: var(--primary-gradient);
+    border-radius: 13px;
+    font-size: 1.2rem;
+}
+.bb-action-icon-blue { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.bb-action-icon-green { background: linear-gradient(135deg, #059669, #10b981); }
+.bb-action-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.bb-action-copy strong { font-size: .93rem; font-weight: 750; }
+.bb-action-copy small { color: var(--bb-muted); font-size: .76rem; line-height: 1.4; }
+.bb-action-arrow { margin-left: auto; color: var(--bb-muted); }
+@media (max-width: 575.98px) {
+    .bb-action-card { min-height: 88px; padding: 14px; }
+}
