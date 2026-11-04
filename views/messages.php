@@ -190,7 +190,7 @@
                 const receiverId = <?= (int)$activeUser['id'] ?>;
                 const myId       = <?= (int)$_SESSION['user_id'] ?>;
                 let lastId       = <?= $lastMessageId ?>;
-                const baseUrl    = '<?= BASE_URL ?>';
+                const baseUrl    = <?= json_encode(BASE_URL, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
 
                 // Scroll to bottom
                 function scrollBottom() {
