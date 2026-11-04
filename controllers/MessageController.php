@@ -101,7 +101,7 @@ class MessageController {
             echo json_encode([
                 'success'    => true,
                 'id'         => $newId,
-                'content'    => htmlspecialchars($content),
+                'content'    => $content,
                 'created_at' => date('H:i'),
             ]);
         } else {
@@ -131,7 +131,7 @@ class MessageController {
             $result[] = [
                 'id'         => $msg['id'],
                 'sender_id'  => $msg['sender_id'],
-                'content'    => htmlspecialchars($msg['content']),
+                'content'    => $msg['content'],
                 'created_at' => date('H:i', strtotime($msg['created_at'])),
                 'is_mine'    => ($msg['sender_id'] == $userId),
             ];
