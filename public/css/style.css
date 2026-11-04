@@ -376,3 +376,161 @@ body {
 .pulse-on-hover:hover {
     animation: softPulse 1.5s infinite;
 }
+
+
+/* =========================================================
+   BrainBoost Premium SaaS UI + responsive refinements
+   ========================================================= */
+:root {
+    color-scheme: light;
+    --bb-page: #f5f7fc;
+    --bb-surface: #ffffff;
+    --bb-surface-muted: #f8f9fe;
+    --bb-text: #182033;
+    --bb-muted: #69758b;
+    --bb-border: #e7eaf2;
+    --bb-shadow: 0 10px 30px rgba(24, 32, 51, .06);
+    --bb-radius: 18px;
+}
+[data-bs-theme="dark"] {
+    color-scheme: dark;
+    --bb-page: #0b1020;
+    --bb-surface: #141c2f;
+    --bb-surface-muted: #10182a;
+    --bb-text: #e8edf8;
+    --bb-muted: #a1acc1;
+    --bb-border: rgba(148, 163, 184, .16);
+    --bb-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+}
+html { scroll-behavior: smooth; }
+body {
+    color: var(--bb-text);
+    background: var(--bb-page);
+    background-image: radial-gradient(ellipse at 10% 0%, rgba(99,102,241,.08), transparent 38%);
+    background-size: auto;
+    animation: none;
+}
+[data-bs-theme="dark"] body {
+    color: var(--bb-text);
+    background: var(--bb-page);
+    background-image: radial-gradient(ellipse at 10% 0%, rgba(124,58,237,.14), transparent 40%);
+    animation: none;
+}
+.container { max-width: 1240px; }
+.navbar-glass {
+    max-width: min(96%, 1320px);
+    border-radius: 18px;
+    background: var(--bb-surface);
+    border: 1px solid var(--bb-border);
+    box-shadow: var(--bb-shadow);
+    backdrop-filter: blur(18px);
+}
+[data-bs-theme="dark"] .navbar-glass {
+    background: rgba(20, 28, 47, .94);
+    border-color: var(--bb-border);
+}
+.navbar-brand { letter-spacing: -.7px; }
+.navbar .nav-link {
+    color: var(--bb-muted);
+    font-weight: 500;
+    border-radius: 10px;
+    transition: color .2s ease, background .2s ease;
+}
+.navbar .nav-link:hover, .navbar .nav-link:focus {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .08);
+}
+[data-bs-theme="dark"] .navbar .nav-link { color: var(--bb-muted); }
+[data-bs-theme="dark"] .navbar .nav-link:hover { color: #c4b5fd; }
+.glass-effect, .card, .dropdown-menu, .modal-content, .list-group-item {
+    color: var(--bb-text);
+    background-color: var(--bb-surface);
+    border-color: var(--bb-border);
+    box-shadow: var(--bb-shadow);
+}
+[data-bs-theme="dark"] .glass-effect,
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .dropdown-menu,
+[data-bs-theme="dark"] .modal-content,
+[data-bs-theme="dark"] .list-group-item {
+    color: var(--bb-text);
+    background-color: var(--bb-surface);
+    border-color: var(--bb-border);
+}
+.card, .question-card, .answer-card {
+    border: 1px solid var(--bb-border);
+    border-radius: var(--bb-radius);
+    box-shadow: var(--bb-shadow);
+}
+.card-header, .card-footer {
+    background: var(--bb-surface-muted);
+    border-color: var(--bb-border);
+}
+[data-bs-theme="dark"] .card-header,
+[data-bs-theme="dark"] .card-footer { background: var(--bb-surface-muted); }
+.text-muted, .text-secondary { color: var(--bb-muted) !important; }
+.form-control, .form-select, .input-group-text {
+    color: var(--bb-text);
+    background-color: var(--bb-surface);
+    border-color: var(--bb-border);
+    border-radius: 11px;
+    min-height: 42px;
+}
+.form-control:focus, .form-select:focus {
+    color: var(--bb-text);
+    background-color: var(--bb-surface);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 .2rem rgba(var(--primary-rgb), .14);
+}
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select,
+[data-bs-theme="dark"] .input-group-text {
+    color: var(--bb-text);
+    background-color: var(--bb-surface-muted);
+    border-color: var(--bb-border);
+}
+[data-bs-theme="dark"] .form-control::placeholder { color: #8490a7; }
+.btn { border-radius: 11px; font-weight: 600; }
+.btn-gradient { border-radius: 11px; }
+.table { --bs-table-color: var(--bb-text); --bs-table-bg: transparent; }
+.dropdown-menu { border-radius: 14px; padding: .5rem; }
+.dropdown-item { color: var(--bb-text); border-radius: 8px; }
+.dropdown-item:hover { color: var(--primary-color); background: rgba(var(--primary-rgb), .08); }
+[data-bs-theme="dark"] .dropdown-item { color: var(--bb-text); }
+[data-bs-theme="dark"] .dropdown-item:hover { background: rgba(167,139,250,.12); }
+.navbar-toggler { border-color: var(--bb-border); border-radius: 10px; }
+.navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(var(--primary-rgb), .15); }
+:focus-visible { outline: 3px solid rgba(var(--primary-rgb), .45); outline-offset: 2px; }
+img, video, iframe { max-width: 100%; }
+pre, code { max-width: 100%; overflow-wrap: anywhere; }
+.container, .row, [class*="col-"] { min-width: 0; }
+@media (max-width: 991.98px) {
+    .navbar-glass { top: 8px; max-width: calc(100% - 16px); padding: 8px 12px; border-radius: 16px; }
+    .navbar-collapse { padding: 12px 4px 6px; }
+    .navbar-nav { align-items: stretch !important; gap: 4px; }
+    .navbar-nav .nav-item { margin-left: 0 !important; margin-right: 0 !important; }
+    .navbar-nav .nav-link { padding: 10px 12px; }
+    .lang-switcher-wrapper { width: fit-content; margin: 4px 0; }
+    .container.my-5 { margin-top: 1.5rem !important; margin-bottom: 1.5rem !important; }
+}
+@media (max-width: 575.98px) {
+    body { font-size:  .94rem; }
+    .container { padding-left: 14px; padding-right: 14px; }
+    .navbar-brand { font-size: 1.18rem; }
+    .navbar-brand img { width: 28px; height: 28px; }
+    .card, .glass-effect { border-radius: 14px; }
+    .card-body { padding: 1rem; }
+    h1, .h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
+    h2, .h2 { font-size: 1.35rem; }
+    .btn { min-height: 40px; }
+    .table-responsive { border-radius: 12px; }
+    .navbar-glass { margin-bottom: 1rem !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
