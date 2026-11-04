@@ -17,7 +17,8 @@ $httpsEnabled = (
     || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443)
 );
 $protocol = $httpsEnabled ? 'https://' : 'http://';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+// Use the server-configured host rather than the client-supplied Host header.
+$host = $_SERVER['SERVER_NAME'] ?? 'localhost';
 $script_path = isset($_SERVER['SCRIPT_NAME']) ? dirname($_SERVER['SCRIPT_NAME']) : '';
 if ($script_path === '/' || $script_path === '\\') {
     $script_path = '';
