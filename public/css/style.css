@@ -585,3 +585,74 @@ pre, code { max-width: 100%; overflow-wrap: anywhere; }
 @media (max-width: 575.98px) {
     .bb-action-card { min-height: 88px; padding: 14px; }
 }
+
+
+/* Left-side hamburger navigation */
+.navbar-glass > .container {
+    display: flex;
+    align-items: center;
+}
+.bb-menu-trigger {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    color: var(--bb-text);
+    background: var(--bb-surface-muted);
+    border: 1px solid var(--bb-border);
+    border-radius: 12px;
+    font-size: 1.45rem;
+}
+.bb-menu-trigger:hover, .bb-menu-trigger:focus {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .1);
+    border-color: rgba(var(--primary-rgb), .3);
+}
+.bb-sidebar {
+    width: min(330px, 88vw) !important;
+    color: var(--bb-text);
+    background: var(--bb-surface);
+    border-right: 1px solid var(--bb-border);
+    box-shadow: 16px 0 50px rgba(15, 23, 42, .12);
+}
+.bb-sidebar .offcanvas-header {
+    padding: 22px 22px 16px;
+    border-bottom: 1px solid var(--bb-border);
+}
+.bb-sidebar .offcanvas-body { padding: 18px 14px; }
+.bb-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 5px;
+}
+.bb-sidebar-nav .nav-item { margin: 0 !important; width: 100%; }
+.bb-sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 11px 13px;
+    color: var(--bb-text);
+    border-radius: 11px;
+}
+.bb-sidebar-nav .nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), .09);
+}
+.bb-sidebar-nav .lang-switcher-wrapper { margin: 4px 0 10px; }
+.bb-sidebar-nav .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    width: 100%;
+    margin-top: 5px;
+}
+.bb-sidebar-nav .dropdown-menu[data-bs-popper] { top: auto; left: auto; }
+.bb-sidebar-nav .nav-item.dropdown .dropdown-menu { box-shadow: none; }
+[data-bs-theme="dark"] .bb-sidebar { background: var(--bb-surface); }
+@media (max-width: 575.98px) {
+    .navbar-glass > .container { flex-wrap: nowrap; }
+    .bb-menu-trigger { margin-right: 10px !important; }
+    .navbar-brand { margin-right: 0; }
+}
