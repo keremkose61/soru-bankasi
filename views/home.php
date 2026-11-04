@@ -33,11 +33,19 @@
     </div>
     <div class="row g-3">
         <div class="col-12 col-md-4">
+            <?php if(($_SESSION['role'] ?? '') === 'teacher'): ?>
+            <a class="bb-action-card" href="#questions-section">
+                <span class="bb-action-icon"><i class="bi bi-chat-dots"></i></span>
+                <span class="bb-action-copy"><strong>Soruları İncele</strong><small>Yanıt bekleyen sorulara göz at</small></span>
+                <i class="bi bi-arrow-up-right bb-action-arrow"></i>
+            </a>
+            <?php else: ?>
             <a class="bb-action-card" href="<?= BASE_URL ?>/question/create">
                 <span class="bb-action-icon"><i class="bi bi-plus-circle"></i></span>
                 <span class="bb-action-copy"><strong>Soru Paylaş</strong><small>Takıldığın soruyu topluluğa sor</small></span>
                 <i class="bi bi-arrow-up-right bb-action-arrow"></i>
             </a>
+            <?php endif; ?>
         </div>
         <div class="col-12 col-md-4">
             <a class="bb-action-card" href="<?= BASE_URL ?>/leaderboard">
