@@ -21,49 +21,7 @@
     </div>
 </div>
 
-<?php if(isset($_SESSION['user_id'])): ?>
-<!-- BrainBoost Quick Actions -->
-<div class="bb-quick-actions mb-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
-        <div>
-            <span class="bb-section-eyebrow">ÇALIŞMA ALANIN</span>
-            <h3 class="fw-bold mb-0">Hızlı Erişim</h3>
-        </div>
-        <span class="text-muted small">Öğrenmeye kaldığın yerden devam et</span>
-    </div>
-    <div class="row g-3">
-        <div class="col-12 col-md-4">
-            <?php if(($_SESSION['role'] ?? '') === 'teacher'): ?>
-            <a class="bb-action-card" href="#questions-section">
-                <span class="bb-action-icon"><i class="bi bi-chat-dots"></i></span>
-                <span class="bb-action-copy"><strong>Soruları İncele</strong><small>Yanıt bekleyen sorulara göz at</small></span>
-                <i class="bi bi-arrow-up-right bb-action-arrow"></i>
-            </a>
-            <?php else: ?>
-            <a class="bb-action-card" href="<?= BASE_URL ?>/question/create">
-                <span class="bb-action-icon"><i class="bi bi-plus-circle"></i></span>
-                <span class="bb-action-copy"><strong>Soru Paylaş</strong><small>Takıldığın soruyu topluluğa sor</small></span>
-                <i class="bi bi-arrow-up-right bb-action-arrow"></i>
-            </a>
-            <?php endif; ?>
-        </div>
-        <div class="col-12 col-md-4">
-            <a class="bb-action-card" href="<?= BASE_URL ?>/leaderboard">
-                <span class="bb-action-icon bb-action-icon-blue"><i class="bi bi-trophy"></i></span>
-                <span class="bb-action-copy"><strong>Liderlik Tablosu</strong><small>Topluluk sıralamasını keşfet</small></span>
-                <i class="bi bi-arrow-up-right bb-action-arrow"></i>
-            </a>
-        </div>
-        <div class="col-12 col-md-4">
-            <a class="bb-action-card" href="<?= BASE_URL ?>/pomodoro">
-                <span class="bb-action-icon bb-action-icon-green"><i class="bi bi-stopwatch"></i></span>
-                <span class="bb-action-copy"><strong>Odaklanma Zamanı</strong><small>Pomodoro ile çalışma seansı başlat</small></span>
-                <i class="bi bi-arrow-up-right bb-action-arrow"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
+<!-- Quick Actions section removed as requested -->
 
 <!-- YKS / Sınav Geri Sayım Sayacı (Countdown Widget) -->
 <div class="row mb-4">
