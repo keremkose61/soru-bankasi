@@ -205,6 +205,17 @@ switch ($base_path) {
         $controller->markBestAnswer($matches[1], $matches[2]);
         break;
 
+    case '/ai-tutor':
+        require 'controllers/AiTutorController.php';
+        (new AiTutorController())->index();
+        break;
+
+    case '/ai-tutor/ask':
+        require_post_method();
+        require 'controllers/AiTutorController.php';
+        (new AiTutorController())->ask();
+        break;
+
     case '/mock-exams':
         require 'controllers/MockExamController.php';
         $controller = new MockExamController();
