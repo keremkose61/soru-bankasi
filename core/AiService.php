@@ -70,6 +70,11 @@ PROMPT;
             ],
         ]);
 
+        if (!function_exists('curl_init')) {
+            error_log('[AiService][OpenAI] PHP cURL extension is not enabled.');
+            return null;
+        }
+
         $ch = curl_init('https://api.openai.com/v1/chat/completions');
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -84,15 +89,22 @@ PROMPT;
         ]);
 
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
 
         if ($httpCode !== 200 || !$response) {
+            $safeError = substr((string) $response, 0, 1200);
+            error_log('[AiService][OpenAI] HTTP ' . $httpCode . '; cURL: ' . $curlError . '; response: ' . $safeError);
             return null;
         }
 
         $data = json_decode($response, true);
-        return $data['choices'][0]['message']['content'] ?? null;
+        $answer = $data['choices'][0]['message']['content'] ?? null;
+        if (!$answer) {
+            error_log('[AiService][OpenAI] API returned HTTP 200 but no answer content: ' . substr((string) $response, 0, 1200));
+        }
+        return $answer;
     }
 
     private static function getHintWithGemini(string $title, string $description, ?string $userPrompt = null): ?string {
@@ -100,6 +112,11 @@ PROMPT;
             'contents'        => [['parts' => [['text' => self::buildPrompt($title, $description, $userPrompt)]]]],
             'generationConfig' => ['temperature' => 0.7, 'maxOutputTokens' => 300],
         ]);
+
+        if (!function_exists('curl_init')) {
+            error_log('[AiService][Gemini] PHP cURL extension is not enabled.');
+            return null;
+        }
 
         $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . GEMINI_API_KEY;
 
@@ -114,15 +131,21 @@ PROMPT;
         ]);
 
         $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
 
         if ($httpCode !== 200 || !$response) {
+            $safeError = substr((string) $response, 0, 1200);
+            error_log('[AiService][Gemini] HTTP ' . $httpCode . '; cURL: ' . $curlError . '; response: ' . $safeError);
             return null;
         }
 
         $data = json_decode($response, true);
         $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
+        if (!$text) {
+            error_log('[AiService][Gemini] API returned HTTP 200 but no answer text: ' . substr((string) $response, 0, 1200));
+        }
         
         if ($text) {
              // Basic markdown to HTML cleanup for gemini just in case
