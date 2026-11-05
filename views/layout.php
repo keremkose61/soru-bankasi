@@ -78,6 +78,7 @@ if (isset($_SESSION['user_id'])) {
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/"><i class="bi bi-house-door"></i><span><?= __('home_link') ?></span></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/leaderboard"><i class="bi bi-trophy"></i><span><?= __('leaderboard') ?></span></a></li>
             <?php if(isset($_SESSION['user_id'])): ?>
+            <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/ai-tutor"><i class="bi bi-robot"></i><span>Yapay Zekâ Öğretmeni</span></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/mock-exams"><i class="bi bi-journal-check"></i><span>Online Deneme</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/performance"><i class="bi bi-graph-up-arrow"></i><span>Başarı Analizi</span></a></li>
             <?php endif; ?>
