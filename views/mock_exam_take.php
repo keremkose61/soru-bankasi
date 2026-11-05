@@ -1,0 +1,12 @@
+<?php ob_start(); ?>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4"><div><span class="badge bg-primary-subtle text-primary">SINAV DEVAM EDİYOR</span><h1 class="h3 fw-bold mt-2 mb-0"><?= htmlspecialchars($attempt['title']) ?></h1><div class="text-muted small"><?= count($attempt['questions']) ?> soru</div></div><div class="fs-3 fw-bold text-danger" id="exam-timer" data-seconds="<?= (int)$remaining ?>">--:--</div></div>
+<form method="POST" action="<?= BASE_URL ?>/mock-exams/submit/<?= (int)$attempt['id'] ?>" id="exam-form">
+<?php foreach($attempt['questions'] as $i=>$q): ?><div class="card border-0 shadow-sm glass-effect mb-3"><div class="card-body p-4"><div class="d-flex justify-content-between mb-3"><strong>Soru <?= $i+1 ?></strong><span class="badge bg-secondary-subtle text-secondary"><?= $i+1 ?>/<?= count($attempt['questions']) ?></span></div><div class="fw-semibold mb-3"><?= nl2br(htmlspecialchars($q['question_text_snapshot'])) ?></div>
+<?php foreach(['A'=>'option_a_snapshot','B'=>'option_b_snapshot','C'=>'option_c_snapshot','D'=>'option_d_snapshot','E'=>'option_e_snapshot'] as $letter=>$field): if(empty($q[$field])) continue; ?><label class="d-flex align-items-start gap-2 border rounded-3 p-3 mb-2"><input class="form-check-input mt-1" type="radio" name="answers[<?= (int)$q['id'] ?>]" value="<?= $letter ?>"><span><strong><?= $letter ?>)</strong> <?= nl2br(htmlspecialchars($q[$field])) ?></span></label><?php endforeach; ?>
+</div></div><?php endforeach; ?>
+<div class="d-flex justify-content-between align-items-center gap-2 mb-5"><a href="<?= BASE_URL ?>/mock-exams" class="btn btn-outline-secondary">Sınavdan çık</a><button type="submit" class="btn btn-success px-4" onclick="return confirm('Sınavı bitirmek istediğine emin misin?')">Sınavı Bitir</button></div>
+</form>
+<script>
+(()=>{const el=document.getElementById('exam-timer'),form=document.getElementById('exam-form');let left=Number(el.dataset.seconds||0);const tick=()=>{const m=Math.floor(left/60),s=left%60;el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(left<=0){form.submit();return;}left--;};tick();setInterval(tick,1000);})();
+</script>
+<?php $content=ob_get_clean(); require __DIR__.'/layout.php';
