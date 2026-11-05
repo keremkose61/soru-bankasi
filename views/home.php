@@ -74,6 +74,69 @@
     </div>
 </div>
 
+<div class="row g-3 mb-4">
+    <div class="col-lg-7">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div>
+                        <h5 class="fw-bold mb-1">Haftalık çalışma grafiğim</h5>
+                        <p class="text-muted small mb-0">Son 7 gündeki tamamlanmış odak sürelerin</p>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill"><?= (int)($weeklyStudyStats['total_week_minutes'] ?? 0) ?> dk toplam</span>
+                </div>
+                <?php
+                    $weeklyValues = $weeklyStudyStats['data'] ?? array_fill(0, 7, 0);
+                    $weeklyMax = max(1, (int)max($weeklyValues));
+                    $weeklyLabels = $weeklyStudyStats['labels'] ?? [];
+                ?>
+                <div class="d-flex align-items-end justify-content-between gap-2" style="height:180px;">
+                    <?php foreach ($weeklyValues as $dayIndex => $minutes): ?>
+                        <div class="d-flex flex-column align-items-center justify-content-end flex-fill h-100">
+                            <small class="text-muted mb-2" style="font-size:.7rem;"><?= (int)$minutes ?> dk</small>
+                            <div class="w-100 rounded-top-3" title="<?= (int)$minutes ?> dakika" style="height:<?= max(5, (int)round(((int)$minutes / $weeklyMax) * 115)) ?>px;max-width:42px;background:linear-gradient(180deg,#818cf8,#4f46e5);"></div>
+                            <small class="text-muted mt-2 text-nowrap" style="font-size:.68rem;"><?= htmlspecialchars($weeklyLabels[$dayIndex] ?? '') ?></small>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="fw-bold mb-1">Ders bazlı ilerlemem</h5>
+                    <p class="text-muted small mb-0">Paylaştığın soruların derslere göre dağılımı</p>
+                </div>
+                <?php if (empty($subjectProgress) || $subjectProgressTotal === 0): ?>
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-journal-plus fs-2 d-block mb-2"></i>
+                        Ders ilerlemeni görmek için henüz soru paylaşmadın.
+                    </div>
+                <?php else: ?>
+                    <div class="d-flex flex-column gap-3">
+                        <?php foreach ($subjectProgress as $subjectRow):
+                            $subjectCount = (int)$subjectRow['count'];
+                            $subjectPercent = (int)round(($subjectCount / $subjectProgressTotal) * 100);
+                        ?>
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="fw-semibold small"><?= htmlspecialchars($subjectRow['subject']) ?></span>
+                                    <span class="text-muted small"><?= $subjectCount ?> soru · %<?= $subjectPercent ?></span>
+                                </div>
+                                <div class="progress" style="height:8px;background:var(--bs-tertiary-bg);">
+                                    <div class="progress-bar rounded-pill" role="progressbar" style="width:<?= $subjectPercent ?>%;" aria-valuenow="<?= $subjectPercent ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row mb-4">
     <div class="col-12">
         <div class="card border-0 shadow-sm glass-effect">
