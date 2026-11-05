@@ -29,6 +29,23 @@ class QuestionController {
         $questions = $this->questionModel->getAll($orderBy, $subject, $searchQuery, $status);
         $subjects = $this->questionModel->getAllSubjects();
 
+        // Personal dashboard data for signed-in users
+        $dashboardStats = null;
+        $recentPomodoroSessions = [];
+        if (isset($_SESSION['user_id'])) {
+            require_once __DIR__ . '/../models/Pomodoro.php';
+            $pomodoroModel = new Pomodoro();
+            $dashboardStats = $pomodoroModel->getUserStats((int)$_SESSION['user_id']);
+
+            $userQuestions = $this->questionModel->getByUserId((int)$_SESSION['user_id']);
+            $dashboardStats['questions_count'] = count($userQuestions);
+            $dashboardStats['answers_count'] = (int)$this->answerModel->getCountByUserId((int)$_SESSION['user_id']);
+
+            $currentUser = $this->userModel->getUserById((int)$_SESSION['user_id']);
+            $dashboardStats['points'] = (int)($currentUser['points'] ?? 0);
+            $recentPomodoroSessions = $pomodoroModel->getRecentSessions((int)$_SESSION['user_id'], 4);
+        }
+
         require __DIR__ . '/../views/home.php';
     }
 
