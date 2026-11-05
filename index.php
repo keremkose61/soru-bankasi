@@ -205,6 +205,44 @@ switch ($base_path) {
         $controller->markBestAnswer($matches[1], $matches[2]);
         break;
 
+    case '/mock-exams':
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->index();
+        break;
+
+    case '/mock-exams/question/create':
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->createQuestion();
+        break;
+
+    case '/mock-exams/start':
+        require_post_method();
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->start();
+        break;
+
+    case (preg_match('/^\\/mock-exams\\/take\\/(\\d+)$/', $base_path, $matches) ? true : false):
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->take((int)$matches[1]);
+        break;
+
+    case (preg_match('/^\\/mock-exams\\/submit\\/(\\d+)$/', $base_path, $matches) ? true : false):
+        require_post_method();
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->submit((int)$matches[1]);
+        break;
+
+    case (preg_match('/^\\/mock-exams\\/result\\/(\\d+)$/', $base_path, $matches) ? true : false):
+        require 'controllers/MockExamController.php';
+        $controller = new MockExamController();
+        $controller->result((int)$matches[1]);
+        break;
+
     case '/performance':
         require 'controllers/PerformanceController.php';
         $controller = new PerformanceController();
