@@ -44,6 +44,11 @@ class QuestionController {
             $currentUser = $this->userModel->getUserById((int)$_SESSION['user_id']);
             $dashboardStats['points'] = (int)($currentUser['points'] ?? 0);
             $recentPomodoroSessions = $pomodoroModel->getRecentSessions((int)$_SESSION['user_id'], 4);
+            $weeklyStudyStats = $pomodoroModel->getLast7DaysStats((int)$_SESSION['user_id']);
+            $subjectProgress = $this->questionModel->getSubjectDistributionByUserId((int)$_SESSION['user_id']);
+            $subjectProgressTotal = array_sum(array_map(static function ($row) {
+                return (int)($row['count'] ?? 0);
+            }, $subjectProgress));
         }
 
         require __DIR__ . '/../views/home.php';
