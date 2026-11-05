@@ -77,6 +77,9 @@ if (isset($_SESSION['user_id'])) {
         <ul class="navbar-nav bb-sidebar-nav">
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/"><i class="bi bi-house-door"></i><span><?= __('home_link') ?></span></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/leaderboard"><i class="bi bi-trophy"></i><span><?= __('leaderboard') ?></span></a></li>
+            <?php if(isset($_SESSION['user_id'])): ?>
+                <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/performance"><i class="bi bi-graph-up-arrow"></i><span>Başarı Analizi</span></a></li>
+            <?php endif; ?>
             <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/pomodoro"><i class="bi bi-stopwatch"></i><span>Pomodoro</span></a></li>
             <?php if(isset($_SESSION['user_id'])): ?>
                 <?php if(($_SESSION['role'] ?? '') === 'teacher'): ?>
