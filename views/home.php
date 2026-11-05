@@ -21,6 +21,99 @@
     </div>
 </div>
 
+<?php if (!empty($dashboardStats)): ?>
+<!-- Personal Learning Dashboard -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small fw-semibold">Sorularım</span>
+                    <i class="bi bi-question-circle text-primary fs-5"></i>
+                </div>
+                <div class="fs-2 fw-bold"><?= (int)$dashboardStats['questions_count'] ?></div>
+                <span class="text-muted small">Paylaştığın soru</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small fw-semibold">Cevaplarım</span>
+                    <i class="bi bi-chat-square-text text-success fs-5"></i>
+                </div>
+                <div class="fs-2 fw-bold"><?= (int)$dashboardStats['answers_count'] ?></div>
+                <span class="text-muted small">Verdiğin cevap</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small fw-semibold">Puanlarım</span>
+                    <i class="bi bi-lightning-charge text-warning fs-5"></i>
+                </div>
+                <div class="fs-2 fw-bold"><?= (int)$dashboardStats['points'] ?></div>
+                <span class="text-muted small">Toplam başarı puanı</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="card h-100 border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted small fw-semibold">Bugünkü Odak</span>
+                    <i class="bi bi-stopwatch text-info fs-5"></i>
+                </div>
+                <div class="fs-2 fw-bold"><?= (int)$dashboardStats['today_minutes'] ?><small class="fs-6 text-muted ms-1">dk</small></div>
+                <span class="text-muted small"><?= (int)$dashboardStats['today_sessions'] ?> tamamlanan seans</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm glass-effect">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Son Odak Çalışmalarım</h5>
+                        <p class="text-muted small mb-0">En son tamamladığın Pomodoro seansları</p>
+                    </div>
+                    <a href="<?= BASE_URL ?>/pomodoro" class="btn btn-sm btn-glass-outline rounded-pill">Pomodoro'ya Git</a>
+                </div>
+                <?php if (empty($recentPomodoroSessions)): ?>
+                    <div class="text-center text-muted py-3">
+                        <i class="bi bi-hourglass-split fs-3 d-block mb-2"></i>
+                        Henüz tamamlanmış bir odak seansın yok. İlk seansını başlat!
+                    </div>
+                <?php else: ?>
+                    <div class="d-flex flex-column gap-2">
+                        <?php foreach ($recentPomodoroSessions as $session): ?>
+                            <div class="d-flex justify-content-between align-items-center p-3 rounded-3" style="background: var(--bs-tertiary-bg);">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:38px;height:38px;background:rgba(79,70,229,.12);">
+                                        <i class="bi bi-clock-history text-primary"></i>
+                                    </span>
+                                    <div>
+                                        <div class="fw-semibold"><?= (int)$session['duration_minutes'] ?> dakikalık çalışma</div>
+                                        <small class="text-muted"><?= htmlspecialchars(date('d.m.Y H:i', strtotime($session['created_at']))) ?></small>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success-subtle text-success">Tamamlandı</span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- Quick Actions section removed as requested -->
 
 <!-- YKS / Sınav Geri Sayım Sayacı (Countdown Widget) -->
