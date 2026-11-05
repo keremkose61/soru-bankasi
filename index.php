@@ -205,6 +205,12 @@ switch ($base_path) {
         $controller->markBestAnswer($matches[1], $matches[2]);
         break;
 
+    case '/performance':
+        require 'controllers/PerformanceController.php';
+        $controller = new PerformanceController();
+        $controller->index();
+        break;
+
     case '/leaderboard':
         require 'controllers/LeaderboardController.php';
         $controller = new LeaderboardController();
